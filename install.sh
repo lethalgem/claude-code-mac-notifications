@@ -42,10 +42,13 @@ add_hook() {
   local matcher="$2"      # empty string = no matcher
   local command="$3"
 
-  # Check if command already present anywhere in the hooks section
+  # Check if a hook pointing to the same script filename already exists
+  # (handles both ~/... and /Users/foo/... path styles)
+  local script_name
+  script_name=$(basename "$command")
   local already_present
-  already_present=$(jq -r --arg cmd "$command" '
-    .hooks // {} | .. | strings | select(. == $cmd)
+  already_present=$(jq -r --arg name "$script_name" '
+    .hooks // {} | .. | strings | select(endswith($name))
   ' "$SETTINGS" 2>/dev/null || true)
 
   if [ -n "$already_present" ]; then
