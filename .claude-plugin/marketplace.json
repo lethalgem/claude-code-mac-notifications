@@ -1,0 +1,11 @@
+{
+  "marketplace": "lethalgem/claude-code-mac-notifications",
+  "plugins": [
+    {
+      "name": "claude-code-mac-notifications",
+      "description": "Native macOS notification hooks for Claude Code",
+      "repository": "https://github.com/lethalgem/claude-code-mac-notifications",
+      "version": "1.0.0"
+    }
+  ]
+}
